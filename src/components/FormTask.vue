@@ -4,6 +4,13 @@ import { ref } from 'vue'
 
 const userStore = useUserStore()
 
+interface Project {
+  id: number
+  name: string
+  description: string
+  status: string
+}
+
 const name = ref<string>(userStore.selectedTask?.name || '')
 const description = ref<string>(userStore.selectedTask?.description || '')
 const status = ref<string>(userStore.selectedTask?.status || '')
@@ -23,7 +30,7 @@ const addTask = () => {
   closeForm()
 }
 
-const updateTask = (project) => {
+const updateTask = (project: Project) => {
   if (!name.value || !description.value || !status.value) {
     alert('Compila tutti i campi')
     return
@@ -34,8 +41,6 @@ const updateTask = (project) => {
     description: description.value,
     status: status.value,
   })
-
-  console.log('Modifica progetto')
 
   closeForm()
 }

@@ -33,6 +33,12 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  const userDeleteTask = (id: number) => {
+    const index = projects.value.findIndex((p) => p.id === id)
+    projects.value.splice(index, 1)
+    console.log('Task eliminato')
+  }
+
   const projects = ref<Project[]>([
     {
       id: 1,
@@ -105,5 +111,6 @@ export const useUserStore = defineStore('user', () => {
     toggleForm,
     openTask,
     userUpdateTask,
+    userDeleteTask,
   }
 })

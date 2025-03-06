@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { useUserStore } from '@/stores/useUserStore'
 import FormTask from '@/components/FormTask.vue'
 
@@ -74,12 +74,25 @@ onMounted(() => {
           <div
             v-for="project in userStore.projects"
             :key="project.id"
-            @click="userStore.openTask(project)"
-            class="bg-white p-4 shadow-md rounded cursor-pointer"
+            class="bg-white p-4 shadow-md rounded"
           >
             <h2 class="text-xl font-bold">{{ project.name }}</h2>
             <p class="text-gray-600">{{ project.description }}</p>
             <span class="text-sm text-green-500 font-semibold">Stato: {{ project.status }}</span>
+            <div class="flex gap-2">
+              <button
+                @click="userStore.openTask(project)"
+                class="px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition cursor-pointer"
+              >
+                Modifica
+              </button>
+              <button
+                @click="userStore.userDeleteTask(project.id)"
+                class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition cursor-pointer"
+              >
+                Elimina
+              </button>
+            </div>
           </div>
         </div>
       </div>
